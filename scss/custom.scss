@@ -1,0 +1,20 @@
+$secondary: #1E1E1E;
+$primary: #C10016;
+$info: #F3F5F7;
+$success: #F3F5F7;
+
+.capital{
+    text-transform: uppercase;
+}
+
+.myShadow {
+    -webkit-box-shadow: 1px 11px 15px 0px rgba(194,194,194,0.68); 
+    box-shadow: 1px 11px 15px 0px rgba(194,194,194,0.68);
+}
+
+.custom-modal .modal-content {
+    border: none; 
+}
+
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
