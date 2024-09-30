@@ -31,7 +31,7 @@ const RdmQuestion = () => {
       setRandomQuestion(categoryQuestions[randomIndex]);
       setSelectedCategory(category);
       setShowModal(true);
-      setRandomBackground();
+      //   setRandomBackground();
     } else {
       console.error("Category not found!");
       setRandomQuestion("No questions available in this category.");
@@ -62,24 +62,24 @@ const RdmQuestion = () => {
 
   const handleClose = () => setShowModal(false);
 
-  const paperImages = [
-    "../src/assets/paper/paper.png",
-    "../src/assets/paper/paper1.png",
-    "../src/assets/paper/paper2.png",
-    "../src/assets/paper/paper3.png",
-    "../src/assets/paper/paper4.png",
-    "../src/assets/paper/paper5.png",
-  ];
+  //   const paperImages = [
+  //     "../src/assets/paper/paper.png",
+  //     "../src/assets/paper/paper1.png",
+  //     "../src/assets/paper/paper2.png",
+  //     "../src/assets/paper/paper3.png",
+  //     "../src/assets/paper/paper4.png",
+  //     "../src/assets/paper/paper5.png",
+  //   ];
 
-  const setRandomBackground = () => {
-    const randomIndex = Math.floor(Math.random() * paperImages.length);
-    setBackgroundImage(paperImages[randomIndex]);
-    console.log(background);
-  };
+  //   const setRandomBackground = () => {
+  //     const randomIndex = Math.floor(Math.random() * paperImages.length);
+  //     setBackgroundImage(paperImages[randomIndex]);
+  //     console.log(background);
+  //   };
 
-  useEffect(() => {
-    setRandomBackground();
-  }, []);
+  //   useEffect(() => {
+  //     setRandomBackground();
+  //   }, []);
 
   return (
     <Container
@@ -163,11 +163,11 @@ const RdmQuestion = () => {
                   <Card
                     style={{
                       height: "13rem",
-                      backgroundImage: `url(${background})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
+                      //   backgroundImage: `url(${background})`,
+                      //   backgroundSize: "cover",
+                      //   backgroundPosition: "center",
                     }}
-                    className="border border-bottom myShadow w-100 "
+                    className="border border-bottom myShadow w-100 bg-success"
                   >
                     <Card.Body className="d-flex align-items-center justify-content-center text-center">
                       <Card.Text className="capital text-primary fw-bold ">
