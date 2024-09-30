@@ -7,6 +7,7 @@ const RdmQuestion = () => {
   const [randomQuestion, setRandomQuestion] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [background, setBackgroundImage] = useState("");
 
   useEffect(() => {
     fetch("/questions.json")
@@ -30,6 +31,7 @@ const RdmQuestion = () => {
       setRandomQuestion(categoryQuestions[randomIndex]);
       setSelectedCategory(category);
       setShowModal(true);
+      setRandomBackground();
     } else {
       console.error("Category not found!");
       setRandomQuestion("No questions available in this category.");
@@ -59,6 +61,26 @@ const RdmQuestion = () => {
   };
 
   const handleClose = () => setShowModal(false);
+
+  const paperImages = [
+    "../src/assets/paper/paper.png",
+    "../src/assets/paper/paper1.png",
+    "../src/assets/paper/paper2.png",
+    "../src/assets/paper/paper3.png",
+    "../src/assets/paper/paper4.png",
+    "../src/assets/paper/paper5.png",
+  ];
+
+  const setRandomBackground = () => {
+    const randomIndex = Math.floor(Math.random() * paperImages.length);
+    setBackgroundImage(paperImages[randomIndex]);
+    console.log(background);
+  };
+
+  useEffect(() => {
+    setRandomBackground();
+  }, []);
+
   return (
     <Container
       fluid
@@ -130,7 +152,7 @@ const RdmQuestion = () => {
             </Modal.Title>
           </Modal.Header>
 
-          <Modal.Body className="d-flex flex-column align-items-center bg-white">
+          <Modal.Body className="d-flex flex-column align-items-center bg-white ">
             <Container>
               <div className="d-flex justify-content-center fw-bold">
                 Random <p className="mx-2 text-primary">{selectedCategory} </p>{" "}
@@ -139,13 +161,22 @@ const RdmQuestion = () => {
               <Row xs={1} className="justify-content-center">
                 <Col className="p-0">
                   <Card
-                    style={{ height: "13rem" }}
-                    className="border border-bottom myShadow bg-info w-100"
+                    style={{
+                      height: "13rem",
+                      backgroundImage: `url(${background})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                    className="border border-bottom myShadow w-100 "
                   >
                     <Card.Body className="d-flex align-items-center justify-content-center text-center">
                       <Card.Text className="capital text-primary fw-bold ">
-                        {randomQuestion ||
-                          "No question available yet. Please select a category."}
+                        {randomQuestion.split("\n").map((line, index) => (
+                          <React.Fragment key={index}>
+                            {line}
+                            <br />
+                          </React.Fragment>
+                        ))}
                       </Card.Text>
                     </Card.Body>
                   </Card>

@@ -29,7 +29,8 @@
     "Do you think I love reading books?",
     "When do you think I most usually like to stay alone?",
     "Which part of a house do you think is my favorite place?",
-    "Do you think I like playing video games?"
+    "Do you think I like playing video games?",
+    "Do i look kind? explain"
   ],
   "Connection": [
     "How likely do you think I will change my career?",
@@ -61,7 +62,8 @@
     "When was the last time you cried?",
     "What are you better at than most people you know?",
     "Who do you want to talk to when you feel lonely?",
-    "What is the hardest part of being abroad?"
+    "What is the hardest part of being abroad?",
+    "Which year of your life so far has been your favorite? Why?"
   ],
   "Reflection": [
     "What do you want to change in your personality right now?",
@@ -93,7 +95,36 @@
     "What do you suggest I should let go of?",
     "Admit something.",
     "What about me that you hardly understand?",
-    "How would you describe me to a stranger?"
+    "How would you describe me to a stranger?",
+    "What title would you give this chapter in your life?",
+    "What is your most toxic trait you can admit to?",
+    "Is there anyone who's changed your life but doesn't know it?",
+    "When was the last time you felt lucky to be you?",
+    "What about you feels hardest to love?",
+    "What people that raised you teach you about love?",
+    "What's your favorite song lyrics you can think of off the top of you head?",
+    "What's been your harderst goodbye?",
+    "What is your heart telling you?",
+    "What is a dream you've let go of?",
+    "What song reminds you of them?",
+    "Who do i feel most myself around? Why?",
+    "Do you think the image you have of yourself matches the image people see you as?",
+    "What's one thing you don't want to take for granted?",
+    "What are you trying not to think about?",
+    "Why do you think we met?",
+    "You hurt me, but thank you for \n  __________",
+    "Are you the toxic one?",
+    "I know i'm in love when \n  __________",
+    "What's the nicest thing a friend has ever done for you?  \n (Tell them)",
+    "What's the most pain you've ever been in that wasn't physical?",
+    "What part of yourself do you see in me?",
+    "Do i remind you of anyone?",
+    "What reminds you of me?",
+    "At this point in your life, what is it that you wish your friends knew about you?",
+    "What's a memory from this past year that makes you smile just thinking about it?",
+    "What have i toloreted from people in the past that i no longer have space for?",
+    "Are you avoiding any hard conversations with yourself/someone?",
+    "What is the best thing you've done for your mental health recently?"
   ],
   "Wildcards": [
     "Draw a picture together (60 seconds)",
@@ -102,9 +133,11 @@
     "Take a selfie together",
     "Create your own question on anything. Make it count!",
     "Look into each other's eyes for 30 seconds. What did you notice?",
-    "Show your photo when you are a kid (in the nude)",
+    "Ask a question you'd be too afraid to ask",
     "Sing a favorite song",
     "Tell the other person to close their eyes and to keep them closed (wait for 15 seconds and kiss them)",
-    "Write a note to your younger selves. After 1 minute, open and compare."
+    "Write a note to your younger selves. After 1 minute, open and compare.",
+    "Each player write a message to the other. Fold and exchange.  Open only once you have parted.",
+    "Admit something"
   ]
 }
