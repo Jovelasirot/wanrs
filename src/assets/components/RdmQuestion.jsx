@@ -7,6 +7,7 @@ const RdmQuestion = () => {
   const [randomQuestion, setRandomQuestion] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [usedQuestions, setUsedQuestions] = useState(new Set());
   const [background, setBackgroundImage] = useState("");
 
   useEffect(() => {
@@ -27,11 +28,23 @@ const RdmQuestion = () => {
   const getRandomQuestion = (category) => {
     const categoryQuestions = questions[category];
     if (categoryQuestions) {
-      const randomIndex = Math.floor(Math.random() * categoryQuestions.length);
-      setRandomQuestion(categoryQuestions[randomIndex]);
-      setSelectedCategory(category);
-      setShowModal(true);
-      //   setRandomBackground();
+      const availableQuestions = categoryQuestions.filter(
+        (question) => !usedQuestions.has(question)
+      );
+
+      if (availableQuestions.length > 0) {
+        const randomIndex = Math.floor(
+          Math.random() * availableQuestions.length
+        );
+        const selectedQuestion = availableQuestions[randomIndex];
+
+        setRandomQuestion(selectedQuestion);
+        setSelectedCategory(category);
+        setShowModal(true);
+        setUsedQuestions((prev) => new Set(prev).add(selectedQuestion));
+      } else {
+        setRandomQuestion("No more questions available in this category.");
+      }
     } else {
       console.error("Category not found!");
       setRandomQuestion("No questions available in this category.");
@@ -42,7 +55,6 @@ const RdmQuestion = () => {
     if (selectedCategory) {
       getRandomQuestion(selectedCategory);
     } else {
-      console.log("No category selected to generate another question.");
       setRandomQuestion("Please select a category first.");
     }
   };
@@ -60,7 +72,10 @@ const RdmQuestion = () => {
     getRandomQuestion(randomCategory);
   };
 
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => {
+    setShowModal(false);
+    setUsedQuestions(new Set());
+  };
 
   //   const paperImages = [
   //     "../src/assets/paper/paper.png",
