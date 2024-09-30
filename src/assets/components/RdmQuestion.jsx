@@ -65,7 +65,7 @@ const RdmQuestion = () => {
       className="d-flex bg-white text-center vh-100 align-items-center text-dark"
     >
       <Container className="d-flex flex-column">
-        <h4 className="fw-bold">ARE WE REALLY STRANGER</h4>
+        <h4 className="fw-bold">ARE WE REALLY STRANGERS</h4>
         <Container>
           <p>Categories</p>
           <Row xl={4} xs={2} className="justify-content-center">
