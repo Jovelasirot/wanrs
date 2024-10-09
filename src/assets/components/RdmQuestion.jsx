@@ -8,6 +8,8 @@ const RdmQuestion = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [usedQuestions, setUsedQuestions] = useState(new Set());
+  const [showModalF, setShowModalF] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
   const [background, setBackgroundImage] = useState("");
 
   useEffect(() => {
@@ -19,7 +21,6 @@ const RdmQuestion = () => {
         return response.json();
       })
       .then((data) => {
-        // console.log("Fetched Questions:", data);
         setQuestions(data);
       })
       .catch((error) => console.error("Error fetching questions:", error));
@@ -32,9 +33,6 @@ const RdmQuestion = () => {
       const availableQuestions = categoryQuestions.filter(
         (question) => !usedQuestions.has(question)
       );
-      if (category === "FHTG") {
-        alert("Questions between two people, the others choose the pair.");
-      }
       if (availableQuestions.length > 0) {
         const randomIndex = Math.floor(
           Math.random() * availableQuestions.length
@@ -44,6 +42,7 @@ const RdmQuestion = () => {
         setRandomQuestion(selectedQuestion);
         setSelectedCategory(category);
         setShowModal(true);
+        setRandomBackground();
         setUsedQuestions((prev) => new Set(prev).add(selectedQuestion));
       } else {
         setRandomQuestion("No more questions available in this category.");
@@ -57,6 +56,7 @@ const RdmQuestion = () => {
   const generateAnotherQuestion = () => {
     if (selectedCategory) {
       getRandomQuestion(selectedCategory);
+      setRandomBackground();
     } else {
       setRandomQuestion("Please select a category first.");
     }
@@ -77,13 +77,33 @@ const RdmQuestion = () => {
 
   const handleClose = () => {
     setShowModal(false);
+    setShowModalF(false);
     setUsedQuestions(new Set());
+  };
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  const paperImages = [
+    "../src/assets/paper/paper.svg",
+    "../src/assets/paper/paper1.svg",
+    "../src/assets/paper/paper2.svg",
+    "../src/assets/paper/paper3.svg",
+    "../src/assets/paper/paper4.svg",
+  ];
+
+  const setRandomBackground = () => {
+    const randomIndex = Math.floor(Math.random() * paperImages.length);
+    setBackgroundImage(paperImages[randomIndex]);
   };
 
   return (
     <Container
       fluid
-      className="d-flex bg-white text-center vh-100 align-items-center text-dark"
+      className={`d-flex ${
+        darkMode ? "bg-dark text-light" : "bg-white text-dark"
+      } text-center vh-100 align-items-center`}
     >
       <Container className="d-flex flex-column">
         <h4 className="fw-bold">ARE WE REALLY STRANGERS</h4>
@@ -112,8 +132,8 @@ const RdmQuestion = () => {
             <Row className="m-3 justify-content-center">
               <Col md={3}>
                 <Button
-                  variant="danger w-100 shadow fw-bold"
-                  onClick={() => getRandomQuestion("FHTG")}
+                  variant="danger shadow fw-bold"
+                  onClick={() => setShowModalF(true)}
                 >
                   FHTG
                 </Button>
@@ -151,24 +171,40 @@ const RdmQuestion = () => {
           </Container>
         </Container>
 
+        <Row>
+          <Col>
+            <Button variant="secondary" onClick={toggleDarkMode}>
+              {darkMode ? (
+                <i className="bi bi-brightness-high"></i>
+              ) : (
+                <i className="bi bi-moon"></i>
+              )}
+            </Button>
+          </Col>
+        </Row>
+
         <Modal
           show={showModal}
           onHide={handleClose}
           centered
-          className="custom-modal bg-white"
+          className={`custom-modal ${
+            darkMode ? "bg-dark text-light" : "bg-white text-dark"
+          }`}
         >
-          <Modal.Header className="border border-0">
-            <Modal.Title>
-              <Button variant="secondary" onClick={handleClose}>
-                <i className="bi bi-arrow-left"></i>
-              </Button>
-            </Modal.Title>
-          </Modal.Header>
+          <Modal.Title className={darkMode ? "bg-dark" : "bg-white "}>
+            <Button variant="secondary " onClick={handleClose}>
+              <i className="bi bi-arrow-left "></i>
+            </Button>
+          </Modal.Title>
 
-          <Modal.Body className="d-flex flex-column align-items-center bg-white ">
+          <Modal.Body
+            className={`d-flex flex-column align-items-center ${
+              darkMode ? "bg-dark" : "bg-white"
+            }`}
+          >
             <Container>
               <div className="d-flex justify-content-center fw-bold">
-                Random <p className="mx-2 text-primary">{selectedCategory} </p>{" "}
+                Random <p className="mx-2 text-primary">{selectedCategory} </p>
                 question
               </div>
               <Row xs={1} className="justify-content-center">
@@ -176,13 +212,13 @@ const RdmQuestion = () => {
                   <Card
                     style={{
                       height: "13rem",
-                      //   backgroundImage: `url(${background})`,
-                      //   backgroundSize: "cover",
-                      //   backgroundPosition: "center",
+                      backgroundImage: `url(${background})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
                     }}
                     className="border border-bottom myShadow w-100 bg-success"
                   >
-                    <Card.Body className="d-flex align-items-center justify-content-center text-center">
+                    <Card.Body className="d-flex align-items-center justify-content-center text-center ">
                       <Card.Text className="capital text-primary fw-bold ">
                         {randomQuestion.split("\n").map((line, index) => (
                           <React.Fragment key={index}>
@@ -198,6 +234,57 @@ const RdmQuestion = () => {
               <Container className="mt-5 text-center">
                 <Button variant="primary " onClick={generateAnotherQuestion}>
                   <i className="bi bi-shuffle"></i>
+                </Button>
+              </Container>
+            </Container>
+          </Modal.Body>
+        </Modal>
+
+        <Modal
+          show={showModalF}
+          onHide={handleClose}
+          centered
+          className={`custom-modal ${
+            darkMode ? "bg-dark text-light" : "bg-white text-dark"
+          }`}
+        >
+          <Modal.Title className={darkMode ? "bg-dark" : "bg-white "}>
+            <Button variant="secondary" onClick={handleClose}>
+              <i className="bi bi-arrow-left"></i>
+            </Button>
+          </Modal.Title>
+
+          <Modal.Body
+            className={`d-flex flex-column align-items-center ${
+              darkMode ? "bg-dark" : "bg-white"
+            }`}
+          >
+            <Container>
+              <Row xs={1} className="justify-content-center">
+                <Col className="p-0">
+                  <Card
+                    style={{
+                      height: "13rem",
+                    }}
+                    className="border border-bottom myShadow w-100 bg-success"
+                  >
+                    <Card.Body className="d-flex align-items-center justify-content-center text-center">
+                      <Card.Text className="capital text-primary fw-bold ">
+                        Questions between two people, the others choose the
+                        pair.
+                        <br></br>
+                        (Five questions each)
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+              <Container className="mt-5 text-center">
+                <Button
+                  variant="primary fw-bold"
+                  onClick={() => getRandomQuestion("FHTG")}
+                >
+                  CONTINUE
                 </Button>
               </Container>
             </Container>
