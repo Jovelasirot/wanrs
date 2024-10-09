@@ -76,7 +76,11 @@ const RdmQuestion = () => {
       availableCategories[
         Math.floor(Math.random() * availableCategories.length)
       ];
-    getRandomQuestion(randomCategory);
+    if (randomCategory === "FHTG") {
+      setShowModalF(true);
+    } else {
+      getRandomQuestion(randomCategory);
+    }
   };
 
   const handleClose = () => {
@@ -107,7 +111,7 @@ const RdmQuestion = () => {
         <h4 className="fw-bold">ARE WE REALLY STRANGERS</h4>
         <Container>
           <p>Categories</p>
-          <Row xl={4} xs={2} className="justify-content-center">
+          <Row xl={4} xs={2} className="justify-content-center g-3">
             <Col>
               <Button
                 variant="danger shadow w-100 fw-bold"
@@ -124,22 +128,6 @@ const RdmQuestion = () => {
                 Connection
               </Button>
             </Col>
-          </Row>
-
-          <Container>
-            <Row className="m-3 justify-content-center">
-              <Col md={3}>
-                <Button
-                  variant="danger shadow fw-bold"
-                  onClick={() => setShowModalF(true)}
-                >
-                  FHTG
-                </Button>
-              </Col>
-            </Row>
-          </Container>
-
-          <Row xl={4} xs={2} className="justify-content-center">
             <Col>
               <Button
                 variant="danger shadow w-100 fw-bold"
@@ -156,20 +144,23 @@ const RdmQuestion = () => {
                 Wildcards
               </Button>
             </Col>
+            <Col>
+              <Button
+                variant="warning w-100 shadow fw-bold"
+                onClick={() => setShowModalF(true)}
+              >
+                FHTG
+              </Button>
+            </Col>
+            <Col>
+              <Button variant="danger w-100 shadow fw-bold" onClick={handleRdm}>
+                Random
+              </Button>
+            </Col>
           </Row>
-
-          <Container>
-            <Row className="m-3">
-              <Col>
-                <Button variant="danger shadow fw-bold" onClick={handleRdm}>
-                  Random
-                </Button>
-              </Col>
-            </Row>
-          </Container>
         </Container>
 
-        <Row>
+        <Row className="mt-3">
           <Col>
             <Button variant="secondary" onClick={toggleDarkMode}>
               {darkMode ? (
