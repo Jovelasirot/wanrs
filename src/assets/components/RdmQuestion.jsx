@@ -27,11 +27,14 @@ const RdmQuestion = () => {
 
   const getRandomQuestion = (category) => {
     const categoryQuestions = questions[category];
+
     if (categoryQuestions) {
       const availableQuestions = categoryQuestions.filter(
         (question) => !usedQuestions.has(question)
       );
-
+      if (category === "FHTG") {
+        alert("Questions between two people, the others choose the pair.");
+      }
       if (availableQuestions.length > 0) {
         const randomIndex = Math.floor(
           Math.random() * availableQuestions.length
@@ -77,25 +80,6 @@ const RdmQuestion = () => {
     setUsedQuestions(new Set());
   };
 
-  //   const paperImages = [
-  //     "../src/assets/paper/paper.png",
-  //     "../src/assets/paper/paper1.png",
-  //     "../src/assets/paper/paper2.png",
-  //     "../src/assets/paper/paper3.png",
-  //     "../src/assets/paper/paper4.png",
-  //     "../src/assets/paper/paper5.png",
-  //   ];
-
-  //   const setRandomBackground = () => {
-  //     const randomIndex = Math.floor(Math.random() * paperImages.length);
-  //     setBackgroundImage(paperImages[randomIndex]);
-  //     console.log(background);
-  //   };
-
-  //   useEffect(() => {
-  //     setRandomBackground();
-  //   }, []);
-
   return (
     <Container
       fluid
@@ -125,10 +109,13 @@ const RdmQuestion = () => {
           </Row>
 
           <Container>
-            <Row className="m-3">
-              <Col>
-                <Button variant="danger shadow fw-bold" onClick={handleRdm}>
-                  Random
+            <Row className="m-3 justify-content-center">
+              <Col md={3}>
+                <Button
+                  variant="danger w-100 shadow fw-bold"
+                  onClick={() => getRandomQuestion("FHTG")}
+                >
+                  FHTG
                 </Button>
               </Col>
             </Row>
@@ -152,7 +139,18 @@ const RdmQuestion = () => {
               </Button>
             </Col>
           </Row>
+
+          <Container>
+            <Row className="m-3">
+              <Col>
+                <Button variant="danger shadow fw-bold" onClick={handleRdm}>
+                  Random
+                </Button>
+              </Col>
+            </Row>
+          </Container>
         </Container>
+
         <Modal
           show={showModal}
           onHide={handleClose}
