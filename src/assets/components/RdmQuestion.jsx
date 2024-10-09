@@ -1,6 +1,10 @@
 import { Button, Card, Col, Modal, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
+import bgOne from "../paper/paper.svg";
+import bgTwo from "../paper/paper2.svg";
+import bgThree from "../paper/paper3.svg";
+import bgFour from "../paper/paper4.svg";
 
 const RdmQuestion = () => {
   const [questions, setQuestions] = useState({});
@@ -85,13 +89,7 @@ const RdmQuestion = () => {
     setDarkMode(!darkMode);
   };
 
-  const paperImages = [
-    "../src/assets/paper/paper.svg",
-    "../src/assets/paper/paper1.svg",
-    "../src/assets/paper/paper2.svg",
-    "../src/assets/paper/paper3.svg",
-    "../src/assets/paper/paper4.svg",
-  ];
+  const paperImages = [bgOne, bgTwo, bgThree, bgFour];
 
   const setRandomBackground = () => {
     const randomIndex = Math.floor(Math.random() * paperImages.length);
