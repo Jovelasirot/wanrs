@@ -175,7 +175,7 @@
     "What is something you admire about me that you've never said?",
     "What was your first impression of me? Did it change over time?",
     "When did you know you could trust me?",
-    "Have I changed you?",
+    "Have I changed you? \n (explain)",
     "Tell me something you think I’m afraid to hear.",
     "What’s a secret you’ve kept from everyone but me?",
     "When was the last time you wanted to say something but didn’t?",
@@ -185,7 +185,22 @@
     "What’s something I do that you think I’m unaware of but you really appreciate?",
     "Do you think we bring out the best in each other?",
     "What do you think is our greatest strength as a pair?",
-    "How do you think I see you?"
+    "How do you think I see you?",
+    "Do you feel at ease with me?",
+    "Could we be good housemates?",
+    "Do you think i am mature?",
+    "Have you ever looked for me in others?",
+    "If you could go back would you change something between us?",
+    "Do you like my profume?",
+    "Do you think we understand each other deeply?",
+    "Is there a moment where you felt most connected to me?",
+    "How do you think I handle my emotions?",
+    "Do you feel like I see the real you?",
+    "Do you ever feel like we’re on different paths? If so, why?",
+    "What do you think would be the hardest part if we lost touch?",
+    "If our time was limited, what would you want to say before it ends?",
+    "What does love mean to you?",
+    "What’s something you think I misunderstand about you?"
   ]
 
 }

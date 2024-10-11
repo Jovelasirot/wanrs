@@ -1,4 +1,4 @@
-import { Button, Card, Col, Modal, Row } from "react-bootstrap";
+import { Button, Card, Col, Modal, ModalHeader, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import bgOne from "../paper/paper.svg";
@@ -13,8 +13,10 @@ const RdmQuestion = () => {
   const [showModal, setShowModal] = useState(false);
   const [usedQuestions, setUsedQuestions] = useState(new Set());
   const [showModalF, setShowModalF] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [background, setBackgroundImage] = useState("");
+  const [questionHistory, setQuestionHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
 
   useEffect(() => {
     fetch("/questions.json")
@@ -42,6 +44,9 @@ const RdmQuestion = () => {
           Math.random() * availableQuestions.length
         );
         const selectedQuestion = availableQuestions[randomIndex];
+
+        setQuestionHistory((prevHistory) => [...prevHistory, selectedQuestion]);
+        setHistoryIndex((prevIndex) => prevIndex + 1);
 
         setRandomQuestion(selectedQuestion);
         setSelectedCategory(category);
@@ -87,6 +92,8 @@ const RdmQuestion = () => {
     setShowModal(false);
     setShowModalF(false);
     setUsedQuestions(new Set());
+    setQuestionHistory([]);
+    setHistoryIndex(-1);
   };
 
   const toggleDarkMode = () => {
@@ -98,6 +105,14 @@ const RdmQuestion = () => {
   const setRandomBackground = () => {
     const randomIndex = Math.floor(Math.random() * paperImages.length);
     setBackgroundImage(paperImages[randomIndex]);
+  };
+
+  const goToPreviousQuestion = () => {
+    if (historyIndex > 0) {
+      const previousQuestion = questionHistory[historyIndex - 1];
+      setRandomQuestion(previousQuestion);
+      setHistoryIndex(historyIndex - 1);
+    }
   };
 
   return (
@@ -162,7 +177,10 @@ const RdmQuestion = () => {
 
         <Row className="mt-3">
           <Col>
-            <Button variant="secondary" onClick={toggleDarkMode}>
+            <Button
+              variant={darkMode ? "light" : "dark"}
+              onClick={toggleDarkMode}
+            >
               {darkMode ? (
                 <i className="bi bi-brightness-high"></i>
               ) : (
@@ -180,11 +198,20 @@ const RdmQuestion = () => {
             darkMode ? "bg-dark text-light" : "bg-white text-dark"
           }`}
         >
-          <Modal.Title className={darkMode ? "bg-dark" : "bg-white "}>
-            <Button variant="secondary " onClick={handleClose}>
-              <i className="bi bi-arrow-left "></i>
-            </Button>
-          </Modal.Title>
+          <ModalHeader
+            className={`border border-0 ${
+              darkMode ? "bg-dark border rounded-0" : "bg-white"
+            }`}
+          >
+            <Modal.Title className={darkMode ? "bg-dark" : "bg-white "}>
+              <Button
+                variant={darkMode ? "light" : "dark"}
+                onClick={handleClose}
+              >
+                <i className="bi bi-arrow-left "></i>
+              </Button>
+            </Modal.Title>
+          </ModalHeader>
 
           <Modal.Body
             className={`d-flex flex-column align-items-center ${
@@ -220,10 +247,23 @@ const RdmQuestion = () => {
                   </Card>
                 </Col>
               </Row>
-              <Container className="mt-5 text-center">
-                <Button variant="primary " onClick={generateAnotherQuestion}>
-                  <i className="bi bi-shuffle"></i>
-                </Button>
+              <Container className="mt-5 ">
+                <Row>
+                  <Col className="text-end">
+                    <Button
+                      variant={darkMode ? "light" : "dark"}
+                      onClick={goToPreviousQuestion}
+                      disabled={historyIndex <= 0}
+                    >
+                      <i className="bi bi-arrow-left"></i>
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button variant="primary" onClick={generateAnotherQuestion}>
+                      <i className="bi bi-shuffle"></i>
+                    </Button>
+                  </Col>
+                </Row>
               </Container>
             </Container>
           </Modal.Body>
@@ -237,11 +277,20 @@ const RdmQuestion = () => {
             darkMode ? "bg-dark text-light" : "bg-white text-dark"
           }`}
         >
-          <Modal.Title className={darkMode ? "bg-dark" : "bg-white "}>
-            <Button variant="secondary" onClick={handleClose}>
-              <i className="bi bi-arrow-left"></i>
-            </Button>
-          </Modal.Title>
+          <ModalHeader
+            className={`border border-0 ${
+              darkMode ? "bg-dark border rounded-0" : "bg-white"
+            }`}
+          >
+            <Modal.Title className={darkMode ? "bg-dark" : "bg-white "}>
+              <Button
+                variant={darkMode ? "light" : "dark"}
+                onClick={handleClose}
+              >
+                <i className="bi bi-arrow-left"></i>
+              </Button>
+            </Modal.Title>
+          </ModalHeader>
 
           <Modal.Body
             className={`d-flex flex-column align-items-center ${
